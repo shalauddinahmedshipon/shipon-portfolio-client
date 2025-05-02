@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-const AllBlogs = () => {
+const BlogSection = () => {
   // Dummy blog data
   const blogs = [
     {
@@ -40,9 +40,9 @@ const AllBlogs = () => {
 
 
   return (
-    <section id="blog" className="py-20 px-6  text-white mb-10">
+    <section id="blog" className="py-20 px-6  text-white">
       <div className="max-w-7xl mx-auto">
-        <h2 className="text-4xl font-bold mb-12 text-center">All Blogs</h2>
+        <h2 className="text-4xl font-bold mb-12 text-center">Latest Blog Posts</h2>
 
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
           {blogs.map((post) => (
@@ -69,9 +69,17 @@ const AllBlogs = () => {
             </div>
           ))}
         </div>
+       <div className='w-full mt-10 flex justify-center'>
+       <Link
+            href="/blogs"
+            className="bg-gray-500 text-white px-6 py-2 rounded-lg hover:bg-primary/90 transition "
+          >
+            View All Blogs
+          </Link>
+       </div>
       </div>
     </section>
   );
 };
 
-export default AllBlogs;
+export default BlogSection;

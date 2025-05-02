@@ -1,3 +1,4 @@
+import BlogSection from "@/components/ui/blog/BlogSection";
 import EducationSection from "@/components/ui/education/EducationSection";
 import ExperienceSection from "@/components/ui/experience/ExperienceSection";
 import HeroSection from "@/components/ui/hero/HeroSection";
@@ -11,6 +12,7 @@ const HomePage = () => {
      <ExperienceSection/>
      <SkillsSection/>
      <EducationSection/>
+     <BlogSection/>
      
     </div>
   );
