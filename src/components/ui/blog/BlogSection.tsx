@@ -1,51 +1,26 @@
-
-
+import { Blog } from '@/types';
 import Image from 'next/image';
 import Link from 'next/link';
 
-const BlogSection = () => {
-  // Dummy blog data
-  const blogs = [
+const BlogSection = async() => {
+  const res =await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/blogs`,
     {
-      _id: '68145bf7ee76c53445f81901',
-      title: 'Why MERN Stack is Great for Startups',
-      content:
-        'The MERN stack (MongoDB, Express, React, Node.js) offers a complete solution for startups to build scalable and maintainable web applications. In this blog, we explore the benefits of MERN...',
-      tags: ['MERN', 'Startup', 'Web Development'],
-      coverImage: 'https://redux.js.org/img/redux-logo-landscape.png', // Real image URL
-      author: 'Shipon',
-      createdAt: '2025-05-02T05:45:27.998Z',
-    },
-    {
-      _id: '68145be5ee76c53445f818fe',
-      title: 'Getting Started with TypeScript in Node.js',
-      content:
-        'TypeScript adds strong typing and developer-friendly features to JavaScript. This beginner-friendly guide will help you set up TypeScript in a Node.js project and explain its core benefits.',
-      tags: ['TypeScript', 'Node.js', 'Backend', 'JavaScript'],
-      coverImage: 'https://redux.js.org/img/redux-logo-landscape.png', // Real image URL
-      author: 'Emily Carter',
-      createdAt: '2025-05-02T05:45:09.764Z',
-    },
-    {
-      _id: '68145b84ee76c53445f818f8',
-      title: 'State Management in React: Context API vs Redux',
-      content:
-        'Managing state in React apps can be challenging as the app grows. Two popular approaches are Context API and Redux. In this article, we’ll explore when to use which and their pros and cons.',
-      tags: ['React', 'State Management', 'Redux', 'Context API'],
-      coverImage: 'https://redux.js.org/img/redux-logo-landscape.png', // Real image URL
-      author: 'Sarah Lee',
-      createdAt: '2025-05-02T05:43:32.936Z',
-    },
-  ];
-
-
+      next:{
+        revalidate:30
+      }
+    }
+  );
+   const data = await res.json();
+   const blogsData:Blog[]=data.data;
+   console.log(blogsData);
+ 
   return (
     <section id="blog" className="py-20 px-6  text-white">
       <div className="max-w-7xl mx-auto">
         <h2 className="text-4xl font-bold mb-12 text-center">Latest Blog Posts</h2>
 
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {blogs.map((post) => (
+          {blogsData.slice(0,3).map((post) => (
             <div
               key={post._id}
               className="bg-white/5 backdrop-blur-md rounded-lg overflow-hidden shadow-md hover:shadow-lg transition"

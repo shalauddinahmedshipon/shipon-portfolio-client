@@ -7,9 +7,12 @@ import ProjectSection from "@/components/ui/project/ProjectSection";
 import SkillsSection from "@/components/ui/skills/SkillsSection";
 import { IProfile } from "@/types";
 
-
 const HomePage = async() => {
-  const res =await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/profile`);
+  const res =await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/profile`,{
+    next:{
+      revalidate:30
+    }
+  });
   const data = await res.json();
   const profileData:IProfile=data.data;
   

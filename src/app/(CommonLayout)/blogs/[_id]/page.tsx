@@ -1,19 +1,33 @@
 import { Blog } from '@/types';
+import { Metadata } from 'next';
 import Image from 'next/image';
 
+export async function generateMetadata({ params }: { params: { _id: string } }): Promise<Metadata> {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/blogs/${params._id}`, {
+    cache: 'no-store',
+  });
 
-const BlogDetail = () => {
-  // Demo data for the blog
-  const blog: Blog = {
-    _id: '68145bf7ee76c53445f81901',
-    title: 'Why MERN Stack is Great for Startups',
-    content:
-      'The MERN stack (MongoDB, Express, React, Node.js) offers a complete solution for startups to build scalable and maintainable web applications. In this blog, we explore the benefits of MERN.The MERN stack (MongoDB, Express, React, Node.js) offers a complete solution for startups to build scalable and maintainable web applications. In this blog, we explore the benefits of MERN.The MERN stack (MongoDB, Express, React, Node.js) offers a complete solution for startups to build scalable and maintainable web applications. In this blog, we explore the benefits of MERN.The MERN stack (MongoDB, Express, React, Node.js) offers a complete solution for startups to build scalable and maintainable web applications. In this blog, we explore the benefits of MERN',
-    tags: ['MERN', 'Startup', 'Web Development'],
-    coverImage: 'https://redux.js.org/img/redux-logo-landscape.png', // Demo image URL
-    author: 'Shipon',
-    createdAt: '2025-05-02T05:45:27.998Z',
+  const data = await res.json();
+  const blog: Blog = data.data;
+
+  return {
+    title: blog.title,
+    description: blog.content.slice(0, 150), 
   };
+}
+
+
+const BlogDetail = async({params}:{params:{_id:string}}) => {
+const {_id}=await params;
+const res =await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/blogs/${_id}`,
+  {
+   cache:"no-store"
+  }
+);
+ const data = await res.json();
+ const blog:Blog=data.data;
+
+
 
   return (
     <section className="pb-20 pt-5 px-6 text-white">
