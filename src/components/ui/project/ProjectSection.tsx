@@ -1,6 +1,7 @@
 import 'swiper/css';
 import ProjectCard from "./ProjectCard";
 import Link from 'next/link';
+import { Project } from '@/types';
 
 // const projects = [
 //   {
@@ -93,14 +94,14 @@ const ProjectSection = async() => {
     }
   );
    const data = await res.json();
-   const blogsData:Blog[]=data.data;
-   console.log(blogsData);
+   const projectsData:Project[]=data.data;
+
   return (
     <section id="projects" className="py-20 px-6  text-white">
       <div className="max-w-6xl mx-auto">
         <h2 className="text-4xl font-bold text-center mb-12">My Projects</h2>
         <div className="grid md:grid-cols-2 gap-8">
-          {projects.map((project, idx) => (
+          {projectsData.slice(0,6).map((project, idx) => (
        
           <ProjectCard key={idx} project={project}/>
           ))}

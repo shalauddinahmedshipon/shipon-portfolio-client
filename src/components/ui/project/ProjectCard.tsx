@@ -56,7 +56,6 @@ const ProjectCard = ({ project }:{project:Project}) => {
    <div className="mt-5 ">
    <Link
             href={`/projects/${project._id}`}
-            target="_blank"
             className="border active:scale-95 border-primary text-primary px-6 py-2 rounded-lg hover:bg-primary hover:text-white transition"
           >
             Details

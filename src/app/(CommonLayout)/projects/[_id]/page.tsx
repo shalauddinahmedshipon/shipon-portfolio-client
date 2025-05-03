@@ -1,47 +1,37 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-// app/projects/[id]/page.tsx
-
 import { ProjectImageCarousel } from "@/components/ui/project/ProjectImageCarousel";
+import { Project } from "@/types";
 import { LinkIcon } from "lucide-react";
-import { notFound } from "next/navigation";
+import { Metadata } from "next";
 
-interface Project {
-  _id: string;
-  title: string;
-  detailedDescription: string;
-  technologies: string[];
-  imageUrls: string[];
-  projectUrl: string;
-  githubFrontendUrl: string;
-  githubBackendUrl: string;
+
+export async function generateMetadata({ params }: { params: { _id: string } }): Promise<Metadata> {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/projects/${params._id}`, {
+    cache: 'no-store',
+  });
+
+  const data = await res.json();
+  const project: Project = data.data;
+
+  return {
+    title: project.title,
+    description: project.shortDescription.slice(0, 150), 
+  };
 }
 
-const getProject = async (id: string): Promise<Project | null> => {
-  const mockData: Project = {
-    _id: "681456e07341660efbd10889",
-    title: "Developer Blog CMS",
-    detailedDescription:
-      "A full-featured blog CMS built with the MERN stack. It includes user authentication, markdown editor, image uploads, and tag-based filtering.",
-    technologies: ["React", "Express", "MongoDB", "Node.js", "JWT", "Mongoose"],
-    imageUrls: [
-      "https://i.ibb.co/6H1Gw5x/blogcms1.jpg",
-      "https://i.ibb.co/GvCnKHn/blogcms2.jpg"
-    ],
-    projectUrl: "https://myblogcms.example.com",
-    githubFrontendUrl: "https://github.com/username/blog-cms-frontend",
-    githubBackendUrl: "https://github.com/username/blog-cms-backend",
-  };
-
-  return mockData;
-};
 
 export default async function ProjectDetailsPage({
   params,
 }: {
-  params: { id: string };
+  params: { _id: string };
 }) {
-  const project = await getProject(params.id);
-  if (!project) return notFound();
+  const {_id} = await params;
+  const res =await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/projects/${_id}`,
+    {
+     cache:"no-store"
+    }
+  );
+   const data = await res.json();
+   const project:Project=data.data;
 
   return (
     <div className="max-w-4xl mx-auto py-8 px-4 text-gray-300">
@@ -51,6 +41,7 @@ export default async function ProjectDetailsPage({
         <ProjectImageCarousel imageUrls={project.imageUrls} />
       </div>
 
+      <p className="mb-4 text-gray-300">{project.shortDescription}</p>
       <p className="mb-4 text-gray-300">{project.detailedDescription}</p>
 
       <h2 className="font-semibold mb-2">Technologies:</h2>
