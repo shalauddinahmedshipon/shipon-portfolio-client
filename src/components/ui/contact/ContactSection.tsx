@@ -1,14 +1,9 @@
 /* eslint-disable react/no-unescaped-entities */
+import { IProfile } from "@/types";
 import { Mail, Phone, MapPin, Github, Linkedin } from "lucide-react";
+import ContactForm from "./ContactForm";
 
-const ContactSection = () => {
-  const contactInfo = {
-    address: "Dhaka, Bangladesh",
-    phone: "+8801XXXXXXXXX",
-    email: "rakib@example.com",
-    linkedIn: "https://linkedin.com/in/rakib-hasan",
-    github: "https://github.com/rakib-dev",
-  };
+const ContactSection = ({profile}:{profile:IProfile}) => {
 
   return (
     <section id="contact" className="py-20 px-6 text-white">
@@ -25,31 +20,31 @@ const ContactSection = () => {
             <div className="flex items-center gap-3">
               <Mail className="text-primary" />
               <a
-                href={`mailto:${contactInfo.email}`}
+                href={`mailto:${profile.contactInfo.email}`}
                 className="text-gray-300 hover:underline"
               >
-                {contactInfo.email}
+                {profile.contactInfo.email}
               </a>
             </div>
 
             <div className="flex items-center gap-3">
               <Phone className="text-primary" />
               <a
-                href={`tel:${contactInfo.phone}`}
+                href={`tel:${profile.contactInfo.phone}`}
                 className="text-gray-300 hover:underline"
               >
-                {contactInfo.phone}
+                {profile.contactInfo.phone}
               </a>
             </div>
 
             <div className="flex items-center gap-3">
               <MapPin className="text-primary" />
-              <p className="text-gray-300">{contactInfo.address}</p>
+              <p className="text-gray-300">{profile.contactInfo.address}</p>
             </div>
 
             <div className="flex items-center gap-5 mt-6">
               <a
-                href={contactInfo.linkedIn}
+                href={profile.contactInfo.linkedIn}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-blue-400 hover:text-blue-500 transition"
@@ -57,7 +52,7 @@ const ContactSection = () => {
                 <Linkedin size={28} />
               </a>
               <a
-                href={contactInfo.github}
+                href={profile.contactInfo.github}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-300 hover:text-white transition"
@@ -68,29 +63,7 @@ const ContactSection = () => {
           </div>
 
           {/* Contact Form */}
-          <form className="space-y-4 bg-white/5 backdrop-blur-md p-6 rounded-lg shadow-md">
-            <input
-              type="text"
-              placeholder="Your Name"
-              className="w-full p-3 rounded bg-white/10 text-white placeholder-gray-400 border border-white/10 focus:outline-none focus:ring-2 focus:ring-primary"
-            />
-            <input
-              type="email"
-              placeholder="Your Email"
-              className="w-full p-3 rounded bg-white/10 text-white placeholder-gray-400 border border-white/10 focus:outline-none focus:ring-2 focus:ring-primary"
-            />
-            <textarea
-              rows={4}
-              placeholder="Your Message"
-              className="w-full p-3 rounded bg-white/10 text-white placeholder-gray-400 border border-white/10 focus:outline-none focus:ring-2 focus:ring-primary"
-            ></textarea>
-            <button
-              type="submit"
-              className="bg-gray-600 text-white py-2 px-6 rounded hover:bg-opacity-90 transition"
-            >
-              Send Message
-            </button>
-          </form>
+        <ContactForm/>
         </div>
       </div>
     </section>

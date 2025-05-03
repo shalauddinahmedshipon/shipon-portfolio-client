@@ -5,18 +5,23 @@ import ExperienceSection from "@/components/ui/experience/ExperienceSection";
 import HeroSection from "@/components/ui/hero/HeroSection";
 import ProjectSection from "@/components/ui/project/ProjectSection";
 import SkillsSection from "@/components/ui/skills/SkillsSection";
+import { IProfile } from "@/types";
 
 
-const HomePage = () => {
+const HomePage = async() => {
+  const res =await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/profile`);
+  const data = await res.json();
+  const profileData:IProfile=data.data;
+  
   return (
     <div >
-     <HeroSection/>
-     <ExperienceSection/>
-     <SkillsSection/>
-     <EducationSection/>
+     <HeroSection profile={profileData}/>
+     <ExperienceSection profile={profileData}/>
+     <SkillsSection profile={profileData}/>
+     <EducationSection profile={profileData}/>
      <ProjectSection/>
      <BlogSection/>
-     <ContactSection/>
+     <ContactSection profile={profileData}/>
     </div>
   );
 };

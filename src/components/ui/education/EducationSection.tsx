@@ -1,18 +1,6 @@
-'use client';
+import { IProfile } from "@/types";
 
-const EducationSection = () => {
-  const educationData = [
-    {
-      degree: 'Bachelor of Science (Bsc. Incomplete)',
-      institution: 'Dhaka College, Department of Mathematics',
-      year: '2020 - 2023',
-    },
-    {
-      degree: 'Higher Secondary Certificate (HSC)',
-      institution: 'Mirpur Cantonment School & College, Science',
-      year: '2016 - 2018',
-    },
-  ];
+const EducationSection = ({profile}:{profile:IProfile}) => {
 
   return (
     <section id="education" className="py-20 px-6 text-white">
@@ -20,7 +8,7 @@ const EducationSection = () => {
         <h2 className="text-4xl font-bold mb-12 text-center">Education</h2>
 
         <div className="space-y-8">
-          {educationData.map((edu, index) => (
+          {profile.education.map((edu, index) => (
             <div
               key={index}
               className="border-l-4 border-primary pl-6 py-4 bg-white/5 hover:bg-white/10 transition rounded-md shadow-sm"
