@@ -1,14 +1,6 @@
+import { Blog } from '@/types';
 import Image from 'next/image';
 
-interface Blog {
-  _id: string;
-  title: string;
-  content: string;
-  tags: string[];
-  coverImage: string;
-  author: string;
-  createdAt: string;
-}
 
 const BlogDetail = () => {
   // Demo data for the blog

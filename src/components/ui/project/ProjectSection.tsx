@@ -1,6 +1,6 @@
-import ProjectCard from '@/components/ui/project/ProjectCard';
 import 'swiper/css';
-
+import ProjectCard from "./ProjectCard";
+import Link from 'next/link';
 
 const projects = [
   {
@@ -84,11 +84,11 @@ const projects = [
   },
 ];
 
-const AllProjectsPage = () => {
+const ProjectSection = () => {
   return (
-    <section id="projects" className="py-20 mb-20 px-6  text-white">
+    <section id="projects" className="py-20 px-6  text-white">
       <div className="max-w-6xl mx-auto">
-        <h2 className="text-4xl font-bold text-center mb-12">All Projects</h2>
+        <h2 className="text-4xl font-bold text-center mb-12">My Projects</h2>
         <div className="grid md:grid-cols-2 gap-8">
           {projects.map((project, idx) => (
        
@@ -96,8 +96,16 @@ const AllProjectsPage = () => {
           ))}
         </div>
       </div>
+      <div className='w-full mt-10 flex justify-center'>
+       <Link
+            href="/projects"
+            className="bg-gray-500 text-white px-6 py-2 rounded-lg hover:bg-primary/90 transition "
+          >
+            View All Projects
+          </Link>
+       </div>
     </section>
   );
 };
 
-export default AllProjectsPage;
+export default ProjectSection;
