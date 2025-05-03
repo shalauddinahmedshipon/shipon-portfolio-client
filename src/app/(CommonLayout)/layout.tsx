@@ -2,6 +2,7 @@ import Footer from '@/components/shared/Footer';
 import Navbar from '@/components/shared/Navbar';
 import { IProfile } from '@/types';
 import React from 'react';
+import { Toaster } from 'sonner';
 
 const CommonLayout = async({children}:{children:React.ReactNode}) => {
     const res =await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/profile`);
@@ -9,6 +10,7 @@ const CommonLayout = async({children}:{children:React.ReactNode}) => {
     const profileData:IProfile=data.data;
   return (
    <>
+   <Toaster richColors />
    <Navbar/>
     <main className='min-h-screen'>
       {children}

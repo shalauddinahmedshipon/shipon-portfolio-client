@@ -16,7 +16,7 @@ const ContactSection = ({profile}:{profile:IProfile}) => {
 
         <div className="grid md:grid-cols-2 gap-8 text-left">
           {/* Contact Info */}
-          <div className="space-y-6">
+          <div className="space-y-6 pt-10">
             <div className="flex items-center gap-3">
               <Mail className="text-primary" />
               <a
@@ -42,22 +42,24 @@ const ContactSection = ({profile}:{profile:IProfile}) => {
               <p className="text-gray-300">{profile.contactInfo.address}</p>
             </div>
 
-            <div className="flex items-center gap-5 mt-6">
+            <div className="flex items-center gap-10 mt-6">
               <a
                 href={profile.contactInfo.linkedIn}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-blue-400 hover:text-blue-500 transition"
+                className="text-blue-400 hover:text-blue-500 transition flex items-center gap-2"
               >
                 <Linkedin size={28} />
+                <span className="text-lg">Linkedin</span>
               </a>
               <a
                 href={profile.contactInfo.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-300 hover:text-white transition"
+                className="text-gray-300 hover:text-white transition flex items-center gap-2"
               >
                 <Github size={28} />
+                <span className="text-lg">Github</span>
               </a>
             </div>
           </div>
